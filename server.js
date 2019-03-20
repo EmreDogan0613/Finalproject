@@ -1,7 +1,7 @@
 const EXPRESS = require("express");
 const SOCKETIO = require("socket.io");
 const app = EXPRESS();
-const server = reuqire(http).server(app);
+const server = require("http").Server(app);
 //const PORT = process.env.PORT || 3000;
 //const http= require("http");
 const IO = SOCKETIO(server);
@@ -19,10 +19,9 @@ app.get('/', function(req, res){
     res.sendFile(PATH.join(__dirname, "/index.html"));
 });
 
-// socket
 IO.sockets.on("connection", function(socket){
     users[socket.id] = randomWords({exactly:1, wordsPerString:2, separator:' '});
-    // node
+
     socket.on("chatRoom", function(room){
         socket.join(room);
         socket.broadcast.in(room).emit("new user", users[socket.id] + " new user has joined");

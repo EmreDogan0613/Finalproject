@@ -5,39 +5,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="/index.css" rel="stylesheet">
-        <title>Chat</title>
-        
+        <title>ChatApp</title>
+<!--        included the css in my index.html because linking it wasnt working for some reason-->
         <style>  
             .outer{
             width: 900px;
             margin: auto;
         }
         .room{
-            width: 400px;
-            margin: 5px;
+            width: 800px;
+            
             align-content: center;
 
 
         }
         .messages{
-            width: 390px;
+            width: 700px;
             margin:5px;
             height: 600px;
-            background-color: aqua;
+            background-color: white;
+            
         }
         .txt-send{
             width: 300px;
             margin:5px;
         }
         body{
-            align-content: center;
+            background-color: #F4DECB;
         }
+        h1{
+            text-align: center;
+        }
+           
+            
         </style>
     </head>
+    
+<!--    same goes for the body js it wasnt liking being in a separate folder-->
     <body>
         <div class="outer">
             <div class="room">
-                <h1>WELCOME TO THE CHAT</h1>
+                <h1>WELCOME TO THE CHAT APP 5000</h1>
                 <div class="messages" id="Messages"></div>
                 <form>
                     <input type="text" name="" id="Txt">
@@ -47,7 +55,7 @@
 
         <script src="/socket.io/socket.io.js"></script>
         <script>
-            var socket = io();
+            var socket = io.connect ("https://boiling-crag-76808.herokuapp.com/");
 
             socket.on("connect", function(){
                 var chatRoom = "chatRoom";
@@ -56,7 +64,6 @@
             });
 
 
-            // NODE
             var Btn = document.getElementById("Btn");
             var Txt = document.getElementById("Txt");
             var Messages = document.getElementById("Messages");
@@ -72,7 +79,9 @@
                 Messages.innerHTML = Messages.innerHTML + "<br>" + data;
             });
 
-
+            var colors = ['#ff0000', '#00ff00', '#0000ff'];
+            var random_color = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('Messages').style.color = random_color;
         </script>
     </body>
 </html>
